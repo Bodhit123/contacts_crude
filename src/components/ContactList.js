@@ -4,6 +4,7 @@ import ContactCard from "./ContactCard";
 
 const ContactList = (props) => {
   const inputEl = useRef("");
+ 
   const deleteContactHandler = (id) => {
     props.getContactId(id);
   };
@@ -23,6 +24,7 @@ const ContactList = (props) => {
 
   const getSearchTerm = () => {
     props.searchKeyWord(inputEl.current.value);
+    console.log(inputEl.current.value);
   };
 
   return (

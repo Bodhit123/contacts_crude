@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-//import { useContactsCrud } from "../context/ContactsCrudContext";
+
 
 const EditContact = (props) =>  {
   const location = useLocation();
@@ -9,9 +9,11 @@ const EditContact = (props) =>  {
   const [newEmail, setNewEmail] = useState(email);
   const [newName, setNewName] = useState(name);
   
-
+  console.log(location);
+  
   const update = (e) => {
     e.preventDefault();
+    
     if (newName === "" || newEmail === "") {
       alert("ALl the fields are mandatory!");
       return;

@@ -9,14 +9,16 @@ import ContactDetail from "./ContactDetail";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
+  
   const LOCAL_STORAGE_KEY = "contacts";
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [contacts, setContacts] = useState(
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) ?? [])
   );
-
+  
   const addContactHandler = (contact) => {
+   
     setContacts([...contacts, { id: uuid(), ...contact }]);
   };
 
@@ -44,6 +46,7 @@ function App() {
           : elem;
       })
     );
+    
   };
   const searchHandler = (searchTerm) => {
     setSearchTerm(searchTerm);
@@ -56,21 +59,23 @@ function App() {
     })
     setSearchResults(newContactList);
     }else{
-      searchResults(contacts)
+      searchResults(contacts);
     }
   }
-
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
   }, [contacts]);
-
+ 
   useEffect(() => {
     const retrieveContacts = JSON.parse(
       localStorage.getItem(LOCAL_STORAGE_KEY)
     );
+    
     if (retrieveContacts) setContacts(retrieveContacts);
-  }, []);
+   
+  },[]);
 
+  
   return (
     <Router>
       <div className="ui container">
