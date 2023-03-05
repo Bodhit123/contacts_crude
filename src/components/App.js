@@ -9,16 +9,12 @@ import ContactDetail from "./ContactDetail";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  
   const LOCAL_STORAGE_KEY = "contacts";
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [contacts, setContacts] = useState(
-    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) ?? [])
-  );
-  
+  const [contacts, setContacts] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []);
+
   const addContactHandler = (contact) => {
-   
     setContacts([...contacts, { id: uuid(), ...contact }]);
   };
 
@@ -46,36 +42,33 @@ function App() {
           : elem;
       })
     );
-    
   };
   const searchHandler = (searchTerm) => {
     setSearchTerm(searchTerm);
     if (searchTerm !== "") {
-      const newContactList = contacts.filter((contact) =>{
+      const newContactList = contacts.filter((contact) => {
         return Object.values(contact)
-        .join(" ")
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-    })
-    setSearchResults(newContactList);
-    }else{
+          .join(" ")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+      });
+      setSearchResults(newContactList);
+    } else {
       searchResults(contacts);
     }
-  }
+  };
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
   }, [contacts]);
- 
+
   useEffect(() => {
     const retrieveContacts = JSON.parse(
       localStorage.getItem(LOCAL_STORAGE_KEY)
     );
-    
-    if (retrieveContacts) setContacts(retrieveContacts);
-   
-  },[]);
 
-  
+    if (retrieveContacts) setContacts(retrieveContacts);
+  }, []);
+
   return (
     <Router>
       <div className="ui container">
@@ -90,7 +83,7 @@ function App() {
             path="/"
             element={
               <ContactList
-                contacts={searchTerm.length < 1 ? contacts :searchResults}
+                contacts={searchTerm.length < 1 ? contacts : searchResults}
                 getContactId={removeContactHandler}
                 updateContactHandler={updateContactHandler}
                 term={searchTerm}
