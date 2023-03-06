@@ -12,7 +12,9 @@ function App() {
   const LOCAL_STORAGE_KEY = "contacts";
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [contacts, setContacts] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []);
+  const [contacts, setContacts] = useState(
+    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []
+    );
 
   const addContactHandler = (contact) => {
     setContacts([...contacts, { id: uuid(), ...contact }]);
