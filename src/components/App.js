@@ -30,7 +30,7 @@ function App() {
   const updateContactHandler = (Name) => {
     const Uname = contacts.find((element) => element.id === Name.id);
     console.log(Uname);
-
+ 
     // const upcontacts = contacts.filter((element) => element.id !== Name.id);
     // setContacts(upcontacts);
     // setContacts((prev) => [
